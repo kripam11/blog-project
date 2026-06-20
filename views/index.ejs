@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Platform API</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="hero">
+        <h1>🚀 Blog Platform API</h1>
+        <p>
+            RESTful API for Users, Posts and Comments with Search,
+            Pagination and Relationships.
+        </p>
+        <p class="note">
+            Sample data in <code>data.js</code> is only a starting point.
+            Use the forms below to create, update, and delete — no need to edit the file each time.
+            Data lives in memory and resets when you restart the server.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>Users</h2>
+
+            <h3>Read</h3>
+            <ul>
+                <li><a href="/users">GET /users</a></li>
+                <li><a href="/users/1">GET /users/:id</a></li>
+                <li><a href="/users/email/test@gmail.com">GET /users/email/:email</a></li>
+            </ul>
+
+            <h3>POST /users</h3>
+            <form class="api-form" data-api-form data-method="POST" data-url="/users">
+                <input type="text" name="name" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <button type="submit">Create user</button>
+            </form>
+
+            <h3>PATCH /users/:id</h3>
+            <form class="api-form" data-api-form data-method="PATCH" data-url="/users/:id">
+                <input type="number" name="id" placeholder="User ID" required>
+                <input type="text" name="name" placeholder="New username">
+                <input type="email" name="email" placeholder="New email">
+                <button type="submit">Update user</button>
+            </form>
+
+            <h3>DELETE /users/:id</h3>
+            <form class="api-form" data-api-form data-method="DELETE" data-url="/users/:id">
+                <input type="number" name="id" placeholder="User ID" required>
+                <button type="submit" class="danger">Delete user</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Posts</h2>
+
+            <h3>Read</h3>
+            <ul>
+                <li><a href="/posts">GET /posts</a></li>
+                <li><a href="/posts/1">GET /posts/:id</a></li>
+            </ul>
+
+            <h3>POST /posts/:authorId</h3>
+            <form class="api-form" data-api-form data-method="POST" data-url="/posts/:authId">
+                <input type="number" name="authId" placeholder="Author ID" required>
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="content" placeholder="Content" required></textarea>
+                <button type="submit">Create post</button>
+            </form>
+
+            <h3>PATCH /posts/:id</h3>
+            <form class="api-form" data-api-form data-method="PATCH" data-url="/posts/:id">
+                <input type="number" name="id" placeholder="Post ID" required>
+                <input type="text" name="title" placeholder="New title">
+                <textarea name="content" placeholder="New content"></textarea>
+                <button type="submit">Update post</button>
+            </form>
+
+            <h3>DELETE /posts/:id</h3>
+            <form class="api-form" data-api-form data-method="DELETE" data-url="/posts/:id">
+                <input type="number" name="id" placeholder="Post ID" required>
+                <button type="submit" class="danger">Delete post</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Comments</h2>
+
+            <h3>Read</h3>
+            <ul>
+                <li><a href="/comments">GET /comments</a></li>
+                <li><a href="/comments/1">GET /comments/:id</a></li>
+            </ul>
+
+            <h3>POST /comments/:postId/:userId</h3>
+            <form class="api-form" data-api-form data-method="POST" data-url="/comments/:postId/:userId">
+                <input type="number" name="postId" placeholder="Post ID" required>
+                <input type="number" name="userId" placeholder="User ID" required>
+                <textarea name="text" placeholder="Comment text" required></textarea>
+                <button type="submit">Create comment</button>
+            </form>
+
+            <h3>PATCH /comments/:commentId</h3>
+            <form class="api-form" data-api-form data-method="PATCH" data-url="/comments/:commentId">
+                <input type="number" name="commentId" placeholder="Comment ID" required>
+                <textarea name="text" placeholder="New text"></textarea>
+                <button type="submit">Update comment</button>
+            </form>
+
+            <h3>DELETE /comments/:commentId</h3>
+            <form class="api-form" data-api-form data-method="DELETE" data-url="/comments/:commentId">
+                <input type="number" name="commentId" placeholder="Comment ID" required>
+                <button type="submit" class="danger">Delete comment</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="result-panel">
+        <h3>API Response</h3>
+        <pre id="api-result">Submit a form above to see the JSON response here.</pre>
+    </div>
+
+    <div class="features">
+
+        <div class="feature-card">
+            <h3>Relationships</h3>
+            <p>
+                User → Posts<br>
+                Post → Comments<br>
+                User → Comments
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Search</h3>
+            <p>
+                <a href="/posts?search=blog">/posts?search=blog</a>
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Pagination</h3>
+            <p>
+                <a href="/posts?page=1&limit=5">/posts?page=1&amp;limit=5</a>
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        Built with Node.js, Express and EJS
+    </footer>
+
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
